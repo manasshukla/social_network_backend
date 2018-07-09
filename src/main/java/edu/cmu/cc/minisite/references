@@ -12,7 +12,7 @@
       "url":"https://dzone.com/articles/building-simple-data-access-layer-using-jdbc",
       "code":"Used to write prepared Java statements code.",
       "description":"Used to write prepared Java statements code."
-    },
+    }
   ],
   "collaborators":[
     {
