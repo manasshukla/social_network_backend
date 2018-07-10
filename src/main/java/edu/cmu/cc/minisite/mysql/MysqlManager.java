@@ -32,8 +32,11 @@ public class MysqlManager {
      */
     public static void initializeConnection() throws ClassNotFoundException,
             SQLException {
-        Class.forName(JDBC_DRIVER);
-        conn = DriverManager.getConnection(URL, DB_USER, DB_PWD);
+        if(null == conn ){
+            Class.forName(JDBC_DRIVER);
+            conn = DriverManager.getConnection(URL, DB_USER, DB_PWD);
+        }
+
     }
 
     public static Map<String,String> getUserQuery(final String sql, String username, String password) {

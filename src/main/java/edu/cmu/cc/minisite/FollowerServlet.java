@@ -12,6 +12,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.SQLException;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
@@ -27,8 +29,9 @@ public class FollowerServlet extends HttpServlet {
     /**
      * Your initialization code goes here.
      */
-    public FollowerServlet() throws IOException {
+    public FollowerServlet() throws IOException, SQLException, ClassNotFoundException {
         BigtableHelper.connect();
+        MysqlManager.initializeConnection();
     }
 
     /**
@@ -52,6 +55,7 @@ public class FollowerServlet extends HttpServlet {
         if(followers.isEmpty()){
             result=JSONUtil.getEmptyFollowerList();
         }else{
+            Collections.sort(followers);
             Map<String, String> followerMap = MysqlManager.getProfilePhotos(followers);
             result = JSONUtil.getFollowerJSON(followerMap);
         }
