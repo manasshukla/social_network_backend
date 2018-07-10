@@ -2,6 +2,9 @@ package edu.cmu.cc.minisite.json;
 
 import org.junit.Test;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import static org.junit.Assert.*;
 
 public class JSONUtilTest {
@@ -13,6 +16,8 @@ public class JSONUtilTest {
 
     @Test
     public void getFollowerList() {
-        System.out.println(JSONUtil.getFollowerJSON().toString());
+        Map<String,String> testMap = new HashMap<>();
+        testMap.put("testUser","testProfile");
+        System.out.println(JSONUtil.getFollowerJSON(testMap).toString());
     }
 }

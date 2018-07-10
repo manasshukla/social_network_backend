@@ -48,7 +48,7 @@ public class FollowerServlet extends HttpServlet {
         String id = request.getParameter("id");
         // TODO: To be implemented
         List<String> followers = BigtableHelper.getFollowers(id);
-        System.out.println(String.join(", ", followers));
+        System.out.println("List of followers from HBASE " +String.join(", ", followers));
         if(followers.isEmpty()){
             result=JSONUtil.getEmptyFollowerList();
         }else{
