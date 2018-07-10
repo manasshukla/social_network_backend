@@ -67,4 +67,50 @@ public class MysqlManager {
         }
         return resultMap;
     }
+
+    public static Map<String,String> getProfilePhotos(List<String> names){
+        Map<String, String > photoMap = new HashMap<>();
+        String query = createInQuery(names.size());
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+        Map<String, String> resultMap = new HashMap<>();
+        try {
+            stmt = conn.prepareStatement(query);
+            for (int i = 1; i <= names.size(); i++) {
+                stmt.setString(i,names.get(i-1));
+            }
+            rs = stmt.executeQuery();
+            while(rs.next()){
+                photoMap.put(rs.getString("username"),rs.getString("profile_photo_url"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            if (stmt != null) {
+                try {
+                    stmt.close();
+                    rs.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+
+        }
+        return photoMap;
+    }
+
+    public static String createInQuery(int length){
+        //To be implemented later
+        String query = "SELECT username, profile_photo_url FROM users WHERE username IN (";
+        StringBuilder queryBuilder = new StringBuilder(query);
+        for( int i = 0; i< length; i++){
+            queryBuilder.append(" ?");
+            if(i != length -1) queryBuilder.append(",");
+        }
+        queryBuilder.append(")");
+        System.out.println("PSTMT Query is "+queryBuilder.toString());
+        return queryBuilder.toString();
+    }
+
+
 }
