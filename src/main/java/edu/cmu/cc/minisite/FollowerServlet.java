@@ -51,18 +51,11 @@ public class FollowerServlet extends HttpServlet {
         String id = request.getParameter("id");
         // TODO: To be implemented
         List<String> followers = BigtableHelper.getFollowers(id);
-        Collections.sort(followers,(e1, e2) -> {
-            int cmp = -e1.compareToIgnoreCase(e2);
-            if (cmp != 0) {
-                return cmp;
-            } else {
-                return e1.compareToIgnoreCase(e2);
-            }
-        });
         System.out.println("List of followers from HBASE " +String.join(", ", followers));
         if(followers.isEmpty()){
             result=JSONUtil.getEmptyFollowerList();
         }else{
+            Collections.sort(followers,String.CASE_INSENSITIVE_ORDER);
             Map<String, String> followerMap = MysqlManager.getProfilePhotos(followers);
             result = JSONUtil.getFollowerJSON(followerMap);
         }

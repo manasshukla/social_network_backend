@@ -15,6 +15,6 @@ public class BigtableHelperTest {
     @Test
     public void getFollowers() throws IOException {
         BigtableHelper.connect();
-        BigtableHelper.getFollowers("---------MC---------");
+        System.out.println(String.join(",",BigtableHelper.getFollowers("xxorlak")));
     }
 }

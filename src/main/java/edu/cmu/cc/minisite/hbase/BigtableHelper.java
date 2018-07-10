@@ -42,10 +42,13 @@ public class BigtableHelper {
     }
 
     public static List<String> getFollowers(String name) throws IOException {
+        List<String> followers = new ArrayList<>();
         Get get = new Get(Bytes.toBytes(name));
         Result  result = bizTable.get(get);
-        List<String> followers = new ArrayList<>();
         NavigableMap<byte[], byte[]> familyMap = result.getFamilyMap( Bytes.toBytes("data"));
+        if(null == familyMap || familyMap.isEmpty()){
+            return followers;
+        }
         for (Map.Entry<byte[], byte[]> entry : familyMap.entrySet()) {
             followers.add(new String(entry.getKey()));
         }
