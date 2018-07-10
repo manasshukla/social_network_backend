@@ -52,11 +52,11 @@ public class FollowerServlet extends HttpServlet {
         // TODO: To be implemented
         List<String> followers = BigtableHelper.getFollowers(id);
         Collections.sort(followers,(e1, e2) -> {
-            int cmp = -e1.compareTo(e2);
+            int cmp = -e1.compareToIgnoreCase(e2);
             if (cmp != 0) {
                 return cmp;
             } else {
-                return e1.compareTo(e2);
+                return e1.compareToIgnoreCase(e2);
             }
         });
         System.out.println("List of followers from HBASE " +String.join(", ", followers));
