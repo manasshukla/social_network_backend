@@ -1,10 +1,7 @@
 package edu.cmu.cc.minisite.mysql;
 
 import java.sql.*;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class MysqlManager {
 
@@ -72,7 +69,7 @@ public class MysqlManager {
     }
 
     public static Map<String,String> getProfilePhotos(List<String> names){
-        Map<String, String > photoMap = new HashMap<>();
+        Map<String, String > photoMap = new TreeMap<>();
         String query = createInQuery(names.size());
         PreparedStatement stmt = null;
         ResultSet rs = null;
@@ -110,7 +107,7 @@ public class MysqlManager {
             queryBuilder.append(" ?");
             if(i != length -1) queryBuilder.append(",");
         }
-        queryBuilder.append(")");
+        queryBuilder.append(") ORDER BY username DESC");
         System.out.println("PSTMT Query is "+queryBuilder.toString());
         return queryBuilder.toString();
     }

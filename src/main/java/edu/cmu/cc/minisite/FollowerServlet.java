@@ -57,6 +57,7 @@ public class FollowerServlet extends HttpServlet {
         }else{
             Collections.sort(followers,String.CASE_INSENSITIVE_ORDER);
             Map<String, String> followerMap = MysqlManager.getProfilePhotos(followers);
+
             result = JSONUtil.getFollowerJSON(followerMap);
         }
 
