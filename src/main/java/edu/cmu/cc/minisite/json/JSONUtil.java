@@ -2,7 +2,9 @@ package edu.cmu.cc.minisite.json;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
+import com.google.gson.JsonPrimitive;
 import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -36,5 +38,20 @@ public class JSONUtil {
         followerobj.add("followers",followers);
 
         return followerobj;
+    }
+
+    public static JsonObject convertListToJSONArray(List<String> inputList){
+        JsonArray commentsArr = new JsonArray();
+        String combinedStr = String.join(",", inputList);
+        inputList.stream().forEach(str -> {
+            JsonPrimitive element = new JsonPrimitive(str);
+            System.out.println("Json primitive string : "+element.getAsString());
+            commentsArr.add(element);
+        });
+        JsonObject commentsObj = new JsonObject();
+        commentsObj.add("Comments", commentsArr);
+        System.out.println(commentsObj.toString());
+
+        return commentsObj;
     }
 }

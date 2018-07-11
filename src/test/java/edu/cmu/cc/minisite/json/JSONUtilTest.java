@@ -1,8 +1,11 @@
 package edu.cmu.cc.minisite.json;
 
+import edu.cmu.cc.minisite.mongo.MongoManager;
 import org.junit.Test;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import static org.junit.Assert.*;
@@ -20,5 +23,27 @@ public class JSONUtilTest {
         testMap.put("testUser","testProfile");
         testMap.put("testUser2","testProfile2");
         System.out.println(JSONUtil.getFollowerJSON(testMap).toString());
+    }
+
+    @Test
+    public void convertToJSONArray() {
+    }
+
+    @Test
+    public void getEmptyFollowerList1() {
+    }
+
+    @Test
+    public void getFollowerJSON() {
+    }
+
+    @Test
+    public void convertListToJSONArray_Empty() {
+        List<String> str = new ArrayList<>();
+        JSONUtil.convertListToJSONArray(str);
+    }
+    @Test
+    public void convertListToJSONArray_Value() {
+        JSONUtil.convertListToJSONArray(MongoManager.getComments("zylo_"));
     }
 }
