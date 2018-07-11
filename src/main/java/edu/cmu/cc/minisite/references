@@ -42,8 +42,33 @@
        "url":"https://hortonworks.com/apache/hbase/",
        "code":"Used to study basic actions in HBase",
        "description":"Used to study basic actions in HBase"
-     }
+     },
 
+
+    {
+      "title":"Gson — Mapping of Arrays and Lists of Objects",
+      "url":"https://futurestud.io/tutorials/gson-mapping-of-arrays-and-lists-of-objects",
+      "code":"Used to convert comments objects to json",
+      "description":"Used to convert comments objects to json"
+     },
+     {
+       "title":"How to convert Java object to / from JSON (Gson)",
+       "url":"https://www.mkyong.com/java/how-do-convert-java-object-to-from-json-format-gson-api/",
+       "code":"Used to convert comments objects to json",
+       "description":"Used to convert comments objects to json"
+     },
+     {
+       "title":"Java MongoDB : Query document",
+       "url":"https://www.mkyong.com/mongodb/java-mongodb-query-document/",
+       "code":"NOT Used : Was trying to figure out how to parse the resultset in mongo db",
+       "description":"NOT Used : Was trying to figure out how to parse the resultset in mongo db"
+     },
+     {
+       "title":"Java Driver Tutorials",
+       "url":"https://mongodb.github.io/mongo-java-driver/3.6/driver/tutorials/",
+       "code":"Used to write code that interacts with mongo db in java",
+       "description":"Used to write code that interacts with mongo db in java"
+     }
   ],
   "collaborators":[
     {
