@@ -6,6 +6,7 @@ import com.mongodb.*;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
 import com.mongodb.client.model.Sorts;
+import edu.cmu.cc.minisite.pojo.Comment;
 import org.bson.Document;
 import org.bson.json.JsonMode;
 import org.bson.json.JsonWriterSettings;
@@ -49,14 +50,23 @@ public class MongoManager{
         }
 
 
-        public static List<String> getComments(String userName){
-            List<String> commentsList = new ArrayList<>();
+        public static List<Comment> getComments(String userName){
+            List<Comment> commentsList = new ArrayList<>();
 
             Block<Document> printBlock = new Block<Document>() {
                 @Override
                 public void apply(Document document) {
-                    JsonObject obj = new JsonObject();
-                    commentsList.add(document.toJson());
+                    Comment comment = new Comment(
+                            document.get("cid").toString(),
+                            document.get("parent_id").toString(),
+                            document.get("uid").toString(),
+                            document.get("timestamp").toString(),
+                            document.get("content").toString(),
+                            document.get("subreddit").toString(),
+                            Integer.parseInt(document.get("ups").toString()),
+                            Integer.parseInt(document.get("downs").toString())
+                            );
+                    commentsList.add(comment);
                 }
             };
 

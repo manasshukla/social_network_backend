@@ -1,8 +1,11 @@
 package edu.cmu.cc.minisite.json;
 
+import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonPrimitive;
+import com.google.gson.reflect.TypeToken;
+import edu.cmu.cc.minisite.pojo.Comment;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
@@ -40,18 +43,28 @@ public class JSONUtil {
         return followerobj;
     }
 
-    public static JsonObject convertListToJSONArray(List<String> inputList){
-        JsonArray commentsArr = new JsonArray();
-        String combinedStr = String.join(",", inputList);
-        inputList.stream().forEach(str -> {
-            JsonPrimitive element = new JsonPrimitive(str);
-            System.out.println("Json primitive string : "+element.getAsString());
-            commentsArr.add(element);
-        });
+
+    public static JsonObject getCommentJson(List<Comment> commentList){
+        JsonArray commentsArray = new JsonArray();
+        for (Comment comment : commentList) {
+            JsonObject jsonComment = new JsonObject();
+            jsonComment.addProperty("cid",comment.getCid());
+            jsonComment.addProperty("parent_id",comment.getParent_id());
+            jsonComment.addProperty("uid",comment.getUid());
+            jsonComment.addProperty("timestamp",comment.getTimestamp());
+            jsonComment.addProperty("content",comment.getContent());
+            jsonComment.addProperty("subreddit",comment.getSubreddit());
+            jsonComment.addProperty("ups",comment.getUps());
+            jsonComment.addProperty("downs",comment.getDowns());
+            commentsArray.add(jsonComment);
+            }
+        System.out.println(commentsArray.toString()+"\n\n");
+
         JsonObject commentsObj = new JsonObject();
-        commentsObj.add("Comments", commentsArr);
-        System.out.println(commentsObj.toString());
+        commentsObj.add("comments",commentsArray);
+        System.out.println("Final JSON : \n"+commentsObj.toString());
 
         return commentsObj;
+
     }
 }

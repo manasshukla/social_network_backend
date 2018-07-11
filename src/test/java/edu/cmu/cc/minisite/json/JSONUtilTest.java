@@ -1,6 +1,7 @@
 package edu.cmu.cc.minisite.json;
 
 import edu.cmu.cc.minisite.mongo.MongoManager;
+import edu.cmu.cc.minisite.pojo.Comment;
 import org.junit.Test;
 
 import java.util.ArrayList;
@@ -39,11 +40,13 @@ public class JSONUtilTest {
 
     @Test
     public void convertListToJSONArray_Empty() {
-        List<String> str = new ArrayList<>();
-        JSONUtil.convertListToJSONArray(str);
+        Comment comment = new Comment();
+        List<Comment> str = new ArrayList<>();
+        str.add(comment);
+        JSONUtil.getCommentJson(str);
     }
     @Test
     public void convertListToJSONArray_Value() {
-        JSONUtil.convertListToJSONArray(MongoManager.getComments("zylo_"));
+        JSONUtil.getCommentJson(MongoManager.getComments("yanick17"));
     }
 }
