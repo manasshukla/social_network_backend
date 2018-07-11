@@ -1,6 +1,8 @@
 package edu.cmu.cc.minisite;
 
 import com.google.gson.JsonObject;
+import edu.cmu.cc.minisite.json.JSONUtil;
+import edu.cmu.cc.minisite.mongo.MongoManager;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -41,6 +43,7 @@ public class HomepageServlet extends HttpServlet {
         JsonObject result = new JsonObject();
         String id = request.getParameter("id");
         // TODO: To be implemented
+        result = JSONUtil.convertListToJSONArray(MongoManager.getComments(id));
         response.setContentType("text/html; charset=UTF-8");
         response.setCharacterEncoding("UTF-8");
         PrintWriter writer = response.getWriter();
