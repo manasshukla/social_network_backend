@@ -68,6 +68,18 @@
        "url":"https://mongodb.github.io/mongo-java-driver/3.6/driver/tutorials/",
        "code":"Used to write code that interacts with mongo db in java",
        "description":"Used to write code that interacts with mongo db in java"
+     },
+     {
+       "title":"MongoDB : Select/Query/Find Document(s) Examples",
+       "url":"https://howtodoinjava.com/mongodb/mongodb-selectqueryfind-documents-examples/",
+       "code":"Used to write mongo db in qyuery in java",
+       "description":"Used to write mongo db in qyuery in java"
+     },
+     {
+       "title":"Gson — Mapping of Nested Objects",
+       "url":"https://futurestud.io/tutorials/gson-mapping-of-nested-objects",
+       "code":"Used to create comment json with parent and grand parent nested items",
+       "description":"Used to create comment json with parent and grand parent nested items"
      }
   ],
   "collaborators":[

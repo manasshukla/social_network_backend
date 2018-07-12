@@ -47,6 +47,13 @@ public class JSONUtilTest {
     }
     @Test
     public void convertListToJSONArray_Value() {
-        JSONUtil.getCommentJson(MongoManager.getComments("yanick17"));
+        List<String> followee = new ArrayList<>();
+        followee.add("waltaaaaaaaaaaaaaaaa");
+        followee.add("krico");
+        followee.add("StraightToVideo");
+
+        JSONUtil.getCommentJson(MongoManager.getComments(followee));
     }
+
+
 }

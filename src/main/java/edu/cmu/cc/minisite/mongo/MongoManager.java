@@ -1,19 +1,14 @@
 package edu.cmu.cc.minisite.mongo;
 
-import com.google.gson.JsonArray;
-import com.google.gson.JsonObject;
 import com.mongodb.*;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
 import com.mongodb.client.model.Sorts;
+import edu.cmu.cc.minisite.json.JSONUtil;
 import edu.cmu.cc.minisite.pojo.Comment;
 import org.bson.Document;
-import org.bson.json.JsonMode;
-import org.bson.json.JsonWriterSettings;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.LinkedList;
 import java.util.List;
 
 import static com.mongodb.client.model.Filters.eq;
@@ -50,7 +45,7 @@ public class MongoManager{
         }
 
 
-        public static List<Comment> getComments(String userName){
+        public static List<Comment> getComments(List<String> userNames){
             List<Comment> commentsList = new ArrayList<>();
 
             Block<Document> printBlock = new Block<Document>() {
@@ -66,17 +61,53 @@ public class MongoManager{
                             Integer.parseInt(document.get("ups").toString()),
                             Integer.parseInt(document.get("downs").toString())
                             );
+                    List<Comment> parent = getParent(comment.getParent_id());
+                    if(!parent.isEmpty()){
+                        comment.setParent(parent.get(0));
+                        List<Comment> grandParent = getParent(parent.get(0).getParent_id());
+                        if(!grandParent.isEmpty()){
+                            comment.setGrandParent(grandParent.get(0));
+                        }
+                    }
                     commentsList.add(comment);
                 }
             };
 
-            MongoCollection<Document> collection = getCollection(DB_NAME,COLLECTION_NAME);
-            collection.find(eq("uid",userName)).sort(Sorts.descending("ups", "timestamp"))
-                    .projection(fields(excludeId())).forEach(printBlock);
+                MongoCollection<Document> collection = getCollection(DB_NAME, COLLECTION_NAME);
+                BasicDBObject inQuery = new BasicDBObject();
+                inQuery.put("uid", new BasicDBObject("$in", userNames));
+                collection.find(inQuery).sort(Sorts.descending("ups", "timestamp"))
+                        .projection(fields(excludeId())).limit(30).forEach(printBlock);
 
             System.out.println("*************************PRINTING FROM LIST ***************************");
             commentsList.stream().forEach(i-> System.out.println(i));
             return commentsList;
+        }
+
+        public static List<Comment> getParent(String id){
+            final List<Comment> comment = new ArrayList<>();
+            Block<Document> printBlock = new Block<Document>() {
+                @Override
+                public void apply(Document document) {
+                    comment.add( new Comment(
+                            document.get("cid").toString(),
+                            document.get("parent_id").toString(),
+                            document.get("uid").toString(),
+                            document.get("timestamp").toString(),
+                            document.get("content").toString(),
+                            document.get("subreddit").toString(),
+                            Integer.parseInt(document.get("ups").toString()),
+                            Integer.parseInt(document.get("downs").toString())
+                    ));
+                }
+            };
+
+            MongoCollection<Document> collection = getCollection(DB_NAME,COLLECTION_NAME);
+            collection.find(eq("cid",id))
+                    .projection(fields(excludeId())).forEach(printBlock);
+
+            return comment;
+
         }
 
 

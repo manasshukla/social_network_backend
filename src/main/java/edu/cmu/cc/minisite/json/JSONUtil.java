@@ -1,9 +1,6 @@
 package edu.cmu.cc.minisite.json;
 
-import com.google.gson.Gson;
-import com.google.gson.JsonArray;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonPrimitive;
+import com.google.gson.*;
 import com.google.gson.reflect.TypeToken;
 import edu.cmu.cc.minisite.pojo.Comment;
 import org.json.simple.JSONArray;
@@ -43,9 +40,25 @@ public class JSONUtil {
         return followerobj;
     }
 
+    public static JsonArray getFollowerJSONArray(Map<String, String> followerMap){
+        JsonArray followers = new JsonArray();
+        List<JsonObject> jsonarray = new ArrayList<>();
+        for (String i : followerMap.keySet()) {
+            System.out.println("User name : "+i+" Profile photo : "+followerMap.get(i));
+            JsonObject follower = new JsonObject();
+            follower.addProperty("name", i);
+            follower.addProperty("profile", followerMap.get(i));
+            followers.add(follower);
+        }
+//        followers.add(jsonarray)
+
+        return followers;
+    }
+
 
     public static JsonObject getCommentJson(List<Comment> commentList){
         JsonArray commentsArray = new JsonArray();
+        Gson gson = new GsonBuilder().create();
         for (Comment comment : commentList) {
             JsonObject jsonComment = new JsonObject();
             jsonComment.addProperty("cid",comment.getCid());
@@ -56,6 +69,13 @@ public class JSONUtil {
             jsonComment.addProperty("subreddit",comment.getSubreddit());
             jsonComment.addProperty("ups",comment.getUps());
             jsonComment.addProperty("downs",comment.getDowns());
+            if(parentExists(comment)){
+                System.out.println(gson.toJson(comment.getParent()));
+                jsonComment.add("parent",gson.toJsonTree(comment.getParent()));
+            }
+            if(grandParentExists(comment)){
+                jsonComment.add("grand_parent",gson.toJsonTree(comment.getGrandParent()));
+            }
             commentsArray.add(jsonComment);
             }
         System.out.println(commentsArray.toString()+"\n\n");
@@ -65,6 +85,22 @@ public class JSONUtil {
         System.out.println("Final JSON : \n"+commentsObj.toString());
 
         return commentsObj;
+
+    }
+
+    public static boolean parentExists(Comment comment){
+        if(null == comment.getParent()){
+            return false;
+        }else
+            return true;
+
+    }
+
+    public static boolean grandParentExists(Comment comment){
+        if(null == comment.getGrandParent()){
+            return false;
+        }else
+            return true;
 
     }
 }

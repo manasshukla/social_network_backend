@@ -1,6 +1,9 @@
 package edu.cmu.cc.minisite;
 
 import com.google.gson.JsonObject;
+import edu.cmu.cc.minisite.hbase.BigtableHelper;
+import edu.cmu.cc.minisite.mongo.MongoManager;
+import edu.cmu.cc.minisite.mysql.MysqlManager;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -8,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.SQLException;
 
 /**
  * Task 4 (1):
@@ -32,7 +36,11 @@ public class TimelineServlet extends HttpServlet {
     /**
      * Your initialization code goes here.
      */
-    public TimelineServlet() {
+    public TimelineServlet() throws SQLException, ClassNotFoundException, IOException {
+        MysqlManager.initializeConnection();
+        BigtableHelper.connect();
+        MongoManager.getMongoClient();
+
     }
 
     /**
@@ -52,6 +60,7 @@ public class TimelineServlet extends HttpServlet {
         JsonObject result = new JsonObject();
         String id = request.getParameter("id");
         // TODO: To be implemented
+        result = TimelineCreater.creteTimeline(id);
         response.setContentType("text/html; charset=UTF-8");
         response.setCharacterEncoding("UTF-8");
         PrintWriter writer = response.getWriter();

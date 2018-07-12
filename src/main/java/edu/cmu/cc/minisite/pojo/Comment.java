@@ -10,6 +10,24 @@ public class Comment {
     private String subreddit;
     private int ups;
     private int downs;
+    private Comment grandParent;
+    private Comment parent;
+
+    public Comment getGrandParent() {
+        return grandParent;
+    }
+
+    public void setGrandParent(Comment grandParent) {
+        this.grandParent = grandParent;
+    }
+
+    public Comment getParent() {
+        return parent;
+    }
+
+    public void setParent(Comment parent) {
+        this.parent = parent;
+    }
 
     public Comment(){}
 
@@ -88,17 +106,17 @@ public class Comment {
         this.downs = downs;
     }
 
-    @Override
-    public String toString() {
-        return "Comment{" +
-                "cid='" + cid + '\'' +
-                ", parent_id='" + parent_id + '\'' +
-                ", uid='" + uid + '\'' +
-                ", timestamp='" + timestamp + '\'' +
-                ", content='" + content + '\'' +
-                ", subreddit='" + subreddit + '\'' +
-                ", ups=" + ups +
-                ", downs=" + downs +
-                '}';
-    }
+//    @Override
+//    public String toString() {
+//        return "{" +
+//                "cid=" + cid +
+//                ", parent_id=" + parent_id +
+//                ", uid='" + uid +
+//                ", timestamp=" + timestamp +
+//                ", content=" + content +
+//                ", subreddit=" + subreddit +
+//                ", ups=" + ups +
+//                ", downs=" + downs +
+//                '}';
+//    }
 }

@@ -1,5 +1,6 @@
 package edu.cmu.cc.minisite.hbase;
 
+import org.junit.Before;
 import org.junit.Test;
 
 import java.io.IOException;
@@ -7,6 +8,11 @@ import java.io.IOException;
 import static org.junit.Assert.*;
 
 public class BigtableHelperTest {
+    @Before
+    public void setUp() throws Exception {
+        BigtableHelper.connect();
+
+    }
 
     @Test
     public void connect() {
@@ -14,7 +20,16 @@ public class BigtableHelperTest {
 
     @Test
     public void getFollowers() throws IOException {
-        BigtableHelper.connect();
-        System.out.println(String.join(",",BigtableHelper.getFollowers("xxorlak")));
+        System.out.println(String.join(",",BigtableHelper.getFollowers("LeadHands")));
+    }
+
+    @Test
+    public void getFollowersMap() throws IOException {
+
+    }
+
+    @Test
+    public void getFollowees() throws IOException {
+        System.out.println(String.join(",",BigtableHelper.getFollowees("LeadHands")));
     }
 }

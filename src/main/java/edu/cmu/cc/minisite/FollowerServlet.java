@@ -50,6 +50,17 @@ public class FollowerServlet extends HttpServlet {
         JsonObject result;
         String id = request.getParameter("id");
         // TODO: To be implemented
+        result = getFollowers(id);
+
+        response.setContentType("text/html; charset=UTF-8");
+        response.setCharacterEncoding("UTF-8");
+        PrintWriter writer = response.getWriter();
+        writer.write(result.toString());
+        writer.close();
+    }
+
+    private JsonObject getFollowers(String id) throws IOException {
+        JsonObject result;
         List<String> followers = BigtableHelper.getFollowers(id);
         System.out.println("List of followers from HBASE " +String.join(", ", followers));
         if(followers.isEmpty()){
@@ -60,12 +71,7 @@ public class FollowerServlet extends HttpServlet {
 
             result = JSONUtil.getFollowerJSON(followerMap);
         }
-
-        response.setContentType("text/html; charset=UTF-8");
-        response.setCharacterEncoding("UTF-8");
-        PrintWriter writer = response.getWriter();
-        writer.write(result.toString());
-        writer.close();
+        return result;
     }
 }
 

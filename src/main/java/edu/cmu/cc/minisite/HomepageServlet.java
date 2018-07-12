@@ -43,7 +43,7 @@ public class HomepageServlet extends HttpServlet {
         JsonObject result = new JsonObject();
         String id = request.getParameter("id");
         // TODO: To be implemented
-        result = JSONUtil.getCommentJson(MongoManager.getComments(id));
+//        result = JSONUtil.getCommentJson(MongoManager.getComments(id));
         response.setContentType("text/html; charset=UTF-8");
         response.setCharacterEncoding("UTF-8");
         PrintWriter writer = response.getWriter();

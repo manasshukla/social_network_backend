@@ -13,6 +13,6 @@ public class MongoManagerTest {
 
     @Test
     public void getComments() {
-        MongoManager.getComments("zylo_");
+//        MongoManager.getComments("zylo_");
     }
 }
