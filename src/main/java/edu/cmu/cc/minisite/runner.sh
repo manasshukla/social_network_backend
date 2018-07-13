@@ -14,7 +14,7 @@
 ###############################################################################
 ##                      README Before You Start                              ##
 ###############################################################################
-# Fill in the functions below for each question with the correct choice(s) 
+    # Fill in the functions below for each question with the correct choice(s)
 # in the function.
 # 
 # This task grades your understanding of differences between SQL and NoSQL 
@@ -45,7 +45,7 @@ q1() {
   # B. Dynamic Schema
   # C. Support for Indexing
   # D. Support for Java API
-  :
+  echo "B"
 }
 
 q2() {
@@ -57,7 +57,7 @@ q2() {
   # B. Data Integrity
   # C. High Write Scalability 
   # D. Database Normalization
-  :
+  echo "C"
 }
 
 q3() {
@@ -69,7 +69,7 @@ q3() {
   # B. Indexing of Columns
   # C. Automatic Replication
   # D. Strong consistency
-  :
+  echo "A"
 }
 
 q4() {
@@ -81,7 +81,7 @@ q4() {
   # B. Increased Performance
   # C. Reliability
   # D. Fault Tolerance
-  :
+  echo "A"
 }
 
 ################################################################################
@@ -164,7 +164,7 @@ q5() {
   # A. MySQL
   # B. HBase
   # C. MongoDB
-  :
+  echo "B"
 }
 
 q6() {
@@ -178,7 +178,7 @@ q6() {
   # 3. Dynamic Schema
   # 4. Utilizes HDFS as its underlying storage
   # 5. Document Storage
-  :
+  echo "34"
 }
 
 # SCENARIO 2: 
@@ -220,7 +220,7 @@ q7() {
   # A. MySQL
   # B. HBase
   # C. MongoDB
-  :
+  echo "1"
 }
 
 q8() {
@@ -234,7 +234,7 @@ q8() {
   # 2. Data Integrity
   # 3. Dynamic Schema
   # 4. Document Storage
-  :
+  echo "12"
 }
 
 # SCENARIO 3: 
@@ -268,7 +268,7 @@ q9() {
   # A. MySQL
   # B. HBase
   # C. MongoDB
-  :
+  echo "C"
 }
 
 q10() {
@@ -284,7 +284,7 @@ q10() {
   # 4. Document Storage
   # 5. Support for Indexing
   # 6. High Scalability
-  :
+  echo "56"
 }
 
 ###############################################################################
